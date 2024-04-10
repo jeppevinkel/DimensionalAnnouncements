@@ -1,0 +1,22 @@
+# Messages support the following template tags
+# <player> is replaced with the players name.
+# <world> is replaced with a prettyfied version of the world name, e.g. world_nether becomes World Nether.
+# <world_nobase> is replaced with a prettyfied version of the world name without including the parent world, e.g. world_the_end becomes The End.
+# <world_raw> is replaced with the raw name of the world.
+
+# Styling Info
+# Colors: Any of the following colors can be used, black, dark_blue, dark_green, dark_aqua, dark_red, dark_purple, gold, gray, dark_gray, blue, green, aqua, red, light_purple, yellow, or white
+# Decorations: Any of the following text decorations can be used, bold, italic, underlined, strikethrough, or obfuscated
+# For more advanced formatting, see https://docs.advntr.dev/minimessage/format.html
+
+# Add an option for each world you want an announcement for.
+worlds:
+  world_nether:
+    message: "<player> has entered the Nether"
+  world_the_end:
+    message: "This is the end for <player>"
+
+# Enable the default message if you want a message announcement for any world.
+default:
+  message: "<red><player></red> has gone to <bold><world_nobase></bold>"
+  enabled: false

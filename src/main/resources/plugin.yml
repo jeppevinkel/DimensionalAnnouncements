@@ -1,0 +1,4 @@
+name: DimensionalAnnouncements
+version: '${version}'
+main: io.github.jeppevinkel.dimensionalannouncements.DimensionalAnnouncements
+api-version: '1.20'
