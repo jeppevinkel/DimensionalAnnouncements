@@ -2,3 +2,8 @@ name: DimensionalAnnouncements
 version: '${version}'
 main: io.github.jeppevinkel.dimensionalannouncements.DimensionalAnnouncements
 api-version: '1.20'
+
+permissions:
+  dimensionalannouncements.exclude:
+    description: People with this permission are not announced when they enter a world.
+    default: false

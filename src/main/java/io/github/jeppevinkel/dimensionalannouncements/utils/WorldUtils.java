@@ -4,7 +4,6 @@ import org.bukkit.World;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 public class WorldUtils {
     public static @NotNull String prettifyWorldName(@NotNull World world) {
@@ -21,9 +20,7 @@ public class WorldUtils {
         }
 
         for(int i = 0; i < nameParts.length; i++){
-            Logger.getGlobal().info(nameParts[i]);
             nameParts[i] = nameParts[i].substring(0, 1).toUpperCase() + nameParts[i].substring(1);
-            Logger.getGlobal().info(nameParts[i]);
         }
         return String.join(" ", nameParts);
     }

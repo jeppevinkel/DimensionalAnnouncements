@@ -14,8 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.logging.Logger;
-
 public class PlayerEvents implements Listener {
     private final DimensionalAnnouncements plugin;
 
@@ -25,16 +23,20 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onPlayerChangedWorld(PlayerChangedWorldEvent event) {
-        FileConfiguration config = plugin.getConfig();
         Player player = event.getPlayer();
+        if (player.hasPermission("dimensionalannouncements.exclude")) {
+            return;
+        }
+
+        FileConfiguration config = plugin.getConfig();
         World destinationWorld = player.getWorld();
         ConfigurationSection worldConfig = config.getConfigurationSection("worlds." + destinationWorld.getName());
         String message = null;
 
-        Logger.getGlobal().info(player.getName() + " changed world to " + destinationWorld.getName());
+        plugin.getLogger().info(player.getName() + " changed world to " + destinationWorld.getName());
 
         if (worldConfig != null) {
-            Logger.getGlobal().info("There is a config for this world!");
+            plugin.getLogger().info("There is a config for this world!");
             message = worldConfig.getString("message");
             if (message == null || message.isEmpty()) {
                 return;
@@ -43,7 +45,7 @@ public class PlayerEvents implements Listener {
             ConfigurationSection defaultConfig = config.getConfigurationSection("default");
 
             if (defaultConfig != null && defaultConfig.getBoolean("enabled")) {
-                Logger.getGlobal().info("There is a default!");
+                plugin.getLogger().info("There is a default!");
                 message = defaultConfig.getString("message");
             }
         }
