@@ -1,10 +1,8 @@
 package io.github.jeppevinkel.dimensionalannouncements.events;
 
 import io.github.jeppevinkel.dimensionalannouncements.DimensionalAnnouncements;
-import io.github.jeppevinkel.dimensionalannouncements.utils.StringUtils;
 import io.github.jeppevinkel.dimensionalannouncements.utils.WorldUtils;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -52,7 +50,6 @@ public class PlayerEvents implements Listener {
 
         if (message != null) {
             Bukkit.broadcast(deserializeMessage(message, player, destinationWorld));
-//            Bukkit.broadcast(Component.text(replaceTemplates(message, player, destinationWorld)));
         }
     }
 
@@ -63,20 +60,5 @@ public class PlayerEvents implements Listener {
                 Placeholder.component("world", Component.text(WorldUtils.prettifyWorldName(world))),
                 Placeholder.component("world_nobase", Component.text(WorldUtils.prettifyWorldName(world, false))),
                 Placeholder.component("world_raw", Component.text(world.getName())));
-    }
-
-    private String replaceTemplates(String message, Player player, World world) {
-        String formattedMessage = message;
-        String prettyWorldName = WorldUtils.prettifyWorldName(world);
-        String prettyWorldNameNoBase = WorldUtils.prettifyWorldName(world, true);
-
-        Logger.getGlobal().info("Pretty: " + prettyWorldName);
-
-        formattedMessage = StringUtils.replaceTemplates(formattedMessage, "\\{player}", player.getName());
-        formattedMessage = StringUtils.replaceTemplates(formattedMessage, "\\{world_raw}", world.getName());
-        formattedMessage = StringUtils.replaceTemplates(formattedMessage, "\\{world:nobase}", prettyWorldNameNoBase);
-        formattedMessage = StringUtils.replaceTemplates(formattedMessage, "\\{world}", prettyWorldName);
-
-        return formattedMessage;
     }
 }
